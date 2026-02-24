@@ -1,5 +1,7 @@
 // Main JavaScript for SIAKAD Bali
 
+
+
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

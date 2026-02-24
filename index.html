@@ -104,6 +104,32 @@
     </style>
 </head>
 <body>
+    <!-- SPLASH SCREEN -->
+<div id="splash-screen">
+    <div class="splash-content">
+        <div class="splash-logo">
+            <img src="assets/images/logo.png" alt="SIAKAD Lady Logo" class="splash-logo-img">
+        </div>
+        <h1 class="splash-title">SIAKAD Lady</h1>
+        <p class="splash-subtitle">Sistem Informasi Akademik</p>
+        <p class="splash-subtitle">Bahasa Bali</p>
+        
+        <!-- Loading Spinner -->
+        <div class="splash-loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+        </div>
+        
+        <!-- Loading Progress -->
+        <div class="splash-progress">
+            <div class="splash-progress-bar" id="splash-progress-bar"></div>
+        </div>
+        
+        <p class="splash-percentage" id="splash-percentage">0%</p>
+        <p class="splash-text" id="splash-text">Memuat...</p>
+    </div>
+</div>
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
 
@@ -299,6 +325,98 @@
 
     <!-- Custom JS -->
      <script src="js/template.js"></script>
+
+     <script>
+// SPLASH SCREEN LOGIC
+(function() {
+    // Cek apakah sudah pernah ditampilkan di session ini
+    if (sessionStorage.getItem('splashShown')) {
+        // Langsung sembunyikan splash screen
+        const splash = document.getElementById('splash-screen');
+        if (splash) {
+            splash.style.display = 'none';
+        }
+        return;
+    }
+    
+    // Tandai bahwa splash sudah ditampilkan
+    sessionStorage.setItem('splashShown', 'true');
+    
+    // Progress loading
+    let progress = 0;
+    const progressBar = document.getElementById('splash-progress-bar');
+    const percentageText = document.getElementById('splash-percentage');
+    const statusText = document.getElementById('splash-text');
+    
+    const loadingMessages = [
+        'Menyiapkan aplikasi...',
+        'Memuat modul pembelajaran...',
+        'Menyambung ke database...',
+        'Memuat quiz...',
+        'Menyiapkan berkas nilai...',
+        'Hampir selesai...'
+    ];
+    
+    let messageIndex = 0;
+    
+    const interval = setInterval(function() {
+        progress += 1;
+        
+        if (progressBar) {
+            progressBar.style.width = progress + '%';
+        }
+        
+        if (percentageText) {
+            percentageText.textContent = progress + '%';
+        }
+        
+        if (progress % 20 === 0 && statusText) {
+            if (messageIndex < loadingMessages.length) {
+                statusText.textContent = loadingMessages[messageIndex];
+                messageIndex++;
+            }
+        }
+        
+        if (progress >= 100) {
+            clearInterval(interval);
+            
+            if (statusText) {
+                statusText.textContent = 'Selamat datang!';
+            }
+            
+            setTimeout(function() {
+                const splash = document.getElementById('splash-screen');
+                if (splash) {
+                    splash.classList.add('fade-out');
+                    
+                    setTimeout(function() {
+                        splash.style.display = 'none';
+                    }, 500);
+                }
+            }, 1000);
+        }
+    }, 5);
+    
+    // Preload images
+    const images = [
+        'assets/images/profile.jpg',
+        'assets/images/gallery/img1.jpg',
+        'assets/images/gallery/img2.jpg',
+        'assets/images/gallery/img3.jpg'
+    ];
+    
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+})();
+
+// Inisialisasi AOS
+AOS.init({
+    duration: 1000,
+    once: true
+});
+</script>
     
     <script>
         // Initialize AOS
