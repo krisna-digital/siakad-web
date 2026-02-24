@@ -112,7 +112,9 @@
             position: relative;
             margin: 30px auto;
             width: 95%;
+            max-width: 900px;
             height: 90%;
+            max-height: 80vh;
             background: white;
             border-radius: 10px;
             overflow: hidden;
@@ -214,8 +216,8 @@
 <!-- BUTTON KEMBALI -->
 <div class="container">
     <div class="back-button">
-        <a href="modul.html" class="btn btn-outline-primary rounded-pill">
-            <i class="fas fa-arrow-left me-2"></i>Kembali ke Pilihan Modul
+        <a href="index.html" class="btn btn-outline-primary rounded-pill">
+            <i class="fas fa-arrow-left me-2"></i>Kembali ke Dashboard
         </a>
     </div>
 </div>
@@ -243,9 +245,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 text-center">
-                <i class="fas fa-file-pdf fa-5x text-danger opacity-50"></i>
-            </div>
+           
         </div>
     </div>
 
@@ -648,7 +648,8 @@
         const viewer = document.getElementById('pdfViewer');
         const modalTitle = document.getElementById('pdfModalTitle');
         
-        viewer.src = pdfPath;
+        // append zoom parameter so PDF fits width automatically
+        viewer.src = pdfPath + '#zoom=page-width';
         modalTitle.innerText = title;
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';

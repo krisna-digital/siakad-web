@@ -97,7 +97,9 @@
             position: relative;
             margin: 50px auto;
             width: 90%;
+            max-width: 900px;
             height: 90%;
+            max-height: 80vh;
             background: white;
             border-radius: 10px;
             overflow: hidden;
@@ -397,10 +399,18 @@
 <script>
     AOS.init();
 
+    /* adjust pdf modal sizing on small screens */
+    const pdfModalContent = document.querySelector('.pdf-modal-content');
+    if (pdfModalContent) {
+        pdfModalContent.style.maxWidth = '90%';
+        pdfModalContent.style.maxHeight = '80vh';
+    }
+
     // Fungsi untuk membuka PDF di modal
     function openPDF(pdfPath, title) {
         document.getElementById('pdfModal').style.display = 'block';
-        document.getElementById('pdfViewer').src = pdfPath;
+        // add zoom parameter so viewer fits width
+        document.getElementById('pdfViewer').src = pdfPath + '#zoom=page-width';
         document.getElementById('pdfModalTitle').innerText = title;
         document.body.style.overflow = 'hidden';
     }
