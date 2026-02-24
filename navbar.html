@@ -1,0 +1,100 @@
+<!-- navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <i class="fas fa-graduation-cap me-2"></i>SIAKAD Lady
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html" id="nav-dashboard">
+                        <i class="fas fa-home me-1"></i>Dashboard
+                    </a>
+                </li>
+                
+                <!-- Modul Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownModul" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-book-open me-1"></i>Modul
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownModul">
+                        <li><a class="dropdown-item" href="modul-bali.html"><i class="fas fa-book me-2 text-primary"></i>Bahasa Bali</a></li>
+                        <li><a class="dropdown-item" href="modul-seni.html"><i class="fas fa-palette me-2 text-success"></i>Seni Budaya</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Quiz Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownQuiz" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-puzzle-piece me-1"></i>Quiz
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownQuiz">
+                        <li><a class="dropdown-item" href="quiz-bali.html"><i class="fas fa-question-circle me-2 text-primary"></i>Quiz Bali</a></li>
+                        <li><a class="dropdown-item" href="quiz-seni.html"><i class="fas fa-question-circle me-2 text-success"></i>Quiz Seni</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Ulangan Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUlangan" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-pen-alt me-1"></i>Ulangan
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownUlangan">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-pen-alt me-2 text-primary"></i>Ulangan Bali</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-pen-alt me-2 text-success"></i>Ulangan Seni</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Berkas Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBerkas" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-file-alt me-1"></i>Berkas
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownBerkas">
+                        <li><a class="dropdown-item" href="berkas-bali.html"><i class="fas fa-file-alt me-2 text-primary"></i>Berkas Bali</a></li>
+                        <li><a class="dropdown-item" href="berkas-seni.html"><i class="fas fa-file-alt me-2 text-success"></i>Berkas Seni</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<script>
+// Fungsi untuk menandai menu aktif berdasarkan halaman
+function setActiveMenu() {
+    const path = window.location.pathname;
+    const page = path.split('/').pop();
+    
+    // Reset semua active
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Set active berdasarkan halaman
+    if (page === 'index.html' || page === '' || page === '/') {
+        document.getElementById('nav-dashboard')?.classList.add('active');
+    }
+    else if (page.includes('modul')) {
+        document.querySelectorAll('.nav-link.dropdown-toggle')[0]?.classList.add('active');
+    }
+    else if (page.includes('quiz')) {
+        document.querySelectorAll('.nav-link.dropdown-toggle')[1]?.classList.add('active');
+    }
+    else if (page.includes('ulangan')) {
+        document.querySelectorAll('.nav-link.dropdown-toggle')[2]?.classList.add('active');
+    }
+    else if (page.includes('berkas')) {
+        document.querySelectorAll('.nav-link.dropdown-toggle')[3]?.classList.add('active');
+    }
+}
+
+// Jalankan setelah navbar di-load
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(setActiveMenu, 100); // Delay sedikit untuk memastikan DOM sudah siap
+});
+</script>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Bahasa Bali - SIAKAD Lady</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .back-button {
+            margin: 20px 0;
+        }
+        .hero-modul {
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #667eea20;
+        }
+        
+        /* Card Modul */
+        .modul-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+            background: white;
+        }
+        .modul-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102,126,234,0.2);
+        }
+        .modul-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+        .modul-number {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 48px;
+            font-weight: bold;
+            opacity: 0.2;
+            color: white;
+        }
+        .modul-body {
+            padding: 25px;
+        }
+        .pdf-icon {
+            font-size: 48px;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+        .badge-level {
+            background: #e5f6ff;
+            color: #0099ff;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+        }
+        .btn-pdf {
+            background: #dc3545;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-pdf:hover {
+            background: #c82333;
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        /* PDF Viewer menggunakan Google Docs (lebih kompatibel) */
+        .pdf-viewer-container {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        .pdf-viewer-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Modal untuk PDF */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .pdf-modal-content {
+            position: relative;
+            margin: 30px auto;
+            width: 95%;
+            height: 90%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .pdf-modal-header {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pdf-modal-header h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+        .pdf-modal-body {
+            height: calc(100% - 70px);
+            padding: 0;
+        }
+        .pdf-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-modal {
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+            line-height: 30px;
+        }
+        .close-modal:hover {
+            color: #dc3545;
+        }
+        
+        /* PDF Thumbnail */
+        .pdf-thumbnail {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .pdf-thumbnail:hover {
+            border-color: #dc3545;
+            transform: scale(1.02);
+        }
+        .pdf-thumbnail i {
+            font-size: 48px;
+            color: #dc3545;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: #667eea;
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        /* Alert untuk PDF */
+        .pdf-alert {
+            background: #fff3cd;
+            border: 1px solid #ffecb5;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .pdf-alert i {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+<div style="height: 70px;"></div>
+
+<!-- BUTTON KEMBALI -->
+<div class="container">
+    <div class="back-button">
+        <a href="modul.html" class="btn btn-outline-primary rounded-pill">
+            <i class="fas fa-arrow-left me-2"></i>Kembali ke Pilihan Modul
+        </a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-modul" data-aos="fade-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">📚 Modul Bahasa Bali</h1>
+                <p class="lead mb-3">Koleksi lengkap modul pembelajaran Bahasa Bali dalam format PDF</p>
+                <div class="d-flex gap-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-book text-primary me-2"></i>
+                        <span>1 Modul</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-pdf text-danger me-2"></i>
+                        <span>Format PDF</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-download text-success me-2"></i>
+                        <span>Bisa Didownload</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-file-pdf fa-5x text-danger opacity-50"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Info PDF -->
+    <div class="pdf-alert" data-aos="fade-up">
+        <i class="fas fa-info-circle"></i>
+        <strong>Tips:</strong> Jika PDF tidak muncul di browser, klik tombol "Download" untuk menyimpan file atau "Buka di Tab Baru" untuk membuka di tab baru.
+    </div>
+
+    <!-- DAFTAR MODUL - 8 MODUL LENGKAP -->
+    <div class="row g-4">
+        <!-- Modul 1 -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="modul-card">
+                <div class="modul-header">
+                    <i class="fas fa-book-open mb-2"></i>
+                    <h5 class="mb-0">Modul 1</h5>
+                    <div class="modul-number">01</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Sembrama Wacana</h6>
+                    <p class="text-muted small mb-3">Materi Sembrama Wacana</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Pemula</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>9 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>4 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bali/SEMBRAMA WACANA.pdf', 'Modul 1: Sembrama Wacana')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bali/SEMBRAMA WACANA.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bali/SEMBRAMA WACANA.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modul 2 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+                    <i class="fas fa-pen-fancy mb-2"></i>
+                    <h5 class="mb-0">Modul 2</h5>
+                    <div class="modul-number">02</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Tata Bahasa Bali</h6>
+                    <p class="text-muted small mb-3">Struktur kalimat, basa alus, basa madia, dan basa kasar</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Menengah</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>32 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>3.1 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul2-tata-bahasa.pdf', 'Modul 2: Tata Bahasa Bali')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul2-tata-bahasa.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul2-tata-bahasa.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 3 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-comment-dots mb-2"></i>
+                    <h5 class="mb-0">Modul 3</h5>
+                    <div class="modul-number">03</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Paribasa Bali</h6>
+                    <p class="text-muted small mb-3">Kumpulan peribahasa, pepatah, dan ungkapan dalam Bahasa Bali</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Pemula</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>28 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>2.8 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul3-paribasa.pdf', 'Modul 3: Paribasa Bali')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul3-paribasa.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul3-paribasa.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 4 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <i class="fas fa-feather-alt mb-2"></i>
+                    <h5 class="mb-0">Modul 4</h5>
+                    <div class="modul-number">04</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Sastra Bali Modern</h6>
+                    <p class="text-muted small mb-3">Puisi, cerpen, dan drama dalam Bahasa Bali kontemporer</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Lanjutan</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>35 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>3.5 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul4-sastra.pdf', 'Modul 4: Sastra Bali Modern')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul4-sastra.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul4-sastra.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 5 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <i class="fas fa-scroll mb-2"></i>
+                    <h5 class="mb-0">Modul 5</h5>
+                    <div class="modul-number">05</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Kesusastraan Bali</h6>
+                    <p class="text-muted small mb-3">Geguritan, kidung, dan karya sastra klasik Bali</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Lanjutan</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>40 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>4.0 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul5-kesusastraan.pdf', 'Modul 5: Kesusastraan Bali')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul5-kesusastraan.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul5-kesusastraan.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 6 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="350">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fas fa-language mb-2"></i>
+                    <h5 class="mb-0">Modul 6</h5>
+                    <div class="modul-number">06</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Percakapan Sehari-hari</h6>
+                    <p class="text-muted small mb-3">Contoh percakapan dalam berbagai situasi menggunakan Bahasa Bali</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Pemula</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>22 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>2.2 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul6-percakapan.pdf', 'Modul 6: Percakapan Sehari-hari')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul6-percakapan.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul6-percakapan.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 7 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+                    <i class="fas fa-puzzle-piece mb-2"></i>
+                    <h5 class="mb-0">Modul 7</h5>
+                    <div class="modul-number">07</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Wariga & Paweweh</h6>
+                    <p class="text-muted small mb-3">Penanggalan Bali dan perhitungan hari baik</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Lanjutan</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>30 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>3.0 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul7-wariga.pdf', 'Modul 7: Wariga & Paweweh')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul7-wariga.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul7-wariga.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 8 -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="450">
+            <div class="modul-card">
+                <div class="modul-header" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <i class="fas fa-chalkboard-teacher mb-2"></i>
+                    <h5 class="mb-0">Modul 8</h5>
+                    <div class="modul-number">08</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Soal Latihan & Evaluasi</h6>
+                    <p class="text-muted small mb-3">Kumpulan soal latihan dan evaluasi untuk semua materi</p>
+                    
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge-level"><i class="fas fa-signal me-1"></i>Semua Level</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>45 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>4.5 MB</span>
+                    </div>
+                    
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-pdf btn-sm flex-grow-1" onclick="openPDF('assets/pdf/bahasa-bali/modul8-latihan.pdf', 'Modul 8: Soal Latihan & Evaluasi')">
+                            <i class="fas fa-eye me-1"></i> Lihat PDF
+                        </button>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul8-latihan.pdf" target="_blank">
+                                    <i class="fas fa-external-link-alt me-2"></i>Buka di Tab Baru
+                                </a></li>
+                                <li><a class="dropdown-item" href="assets/pdf/bahasa-bali/modul8-latihan.pdf" download>
+                                    <i class="fas fa-download me-2"></i>Download PDF
+                                </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<!-- MODAL PDF VIEWER (Menggunakan iframe biasa) -->
+<div id="pdfModal" class="pdf-modal">
+    <div class="pdf-modal-content">
+        <div class="pdf-modal-header">
+            <h5 id="pdfModalTitle">Judul Modul</h5>
+            <span class="close-modal" onclick="closePDF()">&times;</span>
+        </div>
+        <div class="pdf-modal-body">
+            <iframe id="pdfViewer" src="" title="PDF Viewer"></iframe>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL GOOGLE DOCS VIEWER -->
+<div id="googleDocsModal" class="pdf-modal">
+    <div class="pdf-modal-content">
+        <div class="pdf-modal-header">
+            <h5 id="googleDocsTitle">Preview dengan Google Docs</h5>
+            <span class="close-modal" onclick="closeGoogleDocs()">&times;</span>
+        </div>
+        <div class="pdf-modal-body">
+            <iframe id="googleDocsViewer" src="" title="Google Docs Viewer"></iframe>
+        </div>
+    </div>
+</div>
+
+    <!-- SECTION 3: FOOTER -->
+     <div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+     <script src="js/template.js"></script>
+    
+
+<script>
+    AOS.init();
+
+    // Fungsi untuk membuka PDF di modal dengan iframe biasa
+    function openPDF(pdfPath, title) {
+        const modal = document.getElementById('pdfModal');
+        const viewer = document.getElementById('pdfViewer');
+        const modalTitle = document.getElementById('pdfModalTitle');
+        
+        viewer.src = pdfPath;
+        modalTitle.innerText = title;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk membuka PDF dengan Google Docs Viewer (lebih kompatibel)
+    function openGoogleDocsViewer(pdfPath) {
+        const modal = document.getElementById('googleDocsModal');
+        const viewer = document.getElementById('googleDocsViewer');
+        
+        // Google Docs viewer URL
+        const googleDocsUrl = 'https://docs.google.com/viewer?url=' + encodeURIComponent(window.location.origin + '/' + pdfPath) + '&embedded=true';
+        viewer.src = googleDocsUrl;
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk menutup modal PDF biasa
+    function closePDF() {
+        const modal = document.getElementById('pdfModal');
+        const viewer = document.getElementById('pdfViewer');
+        
+        modal.style.display = 'none';
+        viewer.src = '';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Fungsi untuk menutup modal Google Docs
+    function closeGoogleDocs() {
+        const modal = document.getElementById('googleDocsModal');
+        const viewer = document.getElementById('googleDocsViewer');
+        
+        modal.style.display = 'none';
+        viewer.src = '';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Tutup modal jika klik di luar konten
+    window.onclick = function(event) {
+        const modal1 = document.getElementById('pdfModal');
+        const modal2 = document.getElementById('googleDocsModal');
+        
+        if (event.target == modal1) {
+            closePDF();
+        }
+        if (event.target == modal2) {
+            closeGoogleDocs();
+        }
+    }
+
+    // Tutup modal dengan tombol ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closePDF();
+            closeGoogleDocs();
+        }
+    });
+</script>
+
+
+</body>
+</html>

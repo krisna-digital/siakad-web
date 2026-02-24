@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SIAKAD Lady</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 0 80px;
+            margin-bottom: 40px;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #667eea;
+            object-fit: cover;
+        }
+        .quick-access-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            height: 100%;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .quick-access-card:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102,126,234,0.3);
+        }
+        .quick-access-card:hover .text-primary,
+        .quick-access-card:hover .text-success,
+        .quick-access-card:hover .text-warning,
+        .quick-access-card:hover .text-info {
+            color: white !important;
+        }
+        .carousel-item {
+            height: 400px;
+        }
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+        .carousel-caption {
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 30px;
+            text-align: left;
+        }
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: #667eea;
+            transform: translateY(-5px);
+        }
+        .badge-mapel {
+            background: rgba(102,126,234,0.1);
+            color: #667eea;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center" data-aos="fade-up">
+            <h1 class="display-4 fw-bold mb-4">Selamat Datang di SIAKAD Lady</h1>
+            <p class="lead mb-4">Sistem Informasi Akademik untuk Mata Pelajaran Bahasa Bali dan Seni Budaya</p>
+            <a href="#akses-cepat" class="btn btn-light btn-lg rounded-pill px-5">
+                <i class="fas fa-rocket me-2"></i>Mulai Belajar
+            </a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- SECTION 1: PROFIL SAYA -->
+        <section class="mb-5" id="profil">
+            <h2 class="text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-user-circle text-primary me-2"></i>
+                Profil Saya
+            </h2>
+            
+            <div class="profile-card" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-3 text-center">
+                        <img src="assets/images/profile.jpeg" 
+                             alt="Profile" 
+                             class="profile-avatar mb-3">
+                        <h4 class="fw-bold">Ni Kadek Lady Lokita Dewi</h4>
+                        <p class="text-muted">NIP: 198705122015032001</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <span class="badge-mapel"><i class="fas fa-book me-1"></i>Bahasa Bali</span>
+                            <span class="badge-mapel"><i class="fas fa-palette me-1"></i>Seni Budaya</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-9">
+                        <div class="row mt-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-graduation-cap text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Kelas</small>
+                                        <h6 class="mb-0">X dan XI</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-school text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Sekolah</small>
+                                        <h6 class="mb-0">SMK Negeri 5 Negara</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-map-marker-alt text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Alamat</small>
+                                        <h6 class="mb-0">Jembrana, Bali</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-light rounded-circle p-3 me-3">
+                                        <i class="fas fa-calendar text-primary"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted">Tahun Ajaran</small>
+                                        <h6 class="mb-0">2024/2025</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION AKSES CEPAT (Mengarah ke halaman pilih) -->
+        <section class="mb-5" id="akses-cepat">
+            <h2 class="text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-rocket text-primary me-2"></i>
+                Akses Cepat
+            </h2>
+            
+            <div class="row">
+                <div class="col-md-3 mb-3" data-aos="fade-up" data-aos-delay="100">
+                    <a href="modul.html" class="quick-access-card">
+                        <i class="fas fa-book-open fa-3x text-primary mb-3"></i>
+                        <h5>Modul</h5>
+                        <p class="text-muted small mb-0">Pilih Modul</p>
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3" data-aos="fade-up" data-aos-delay="150">
+                    <a href="quiz.html" class="quick-access-card">
+                        <i class="fas fa-question-circle fa-3x text-success mb-3"></i>
+                        <h5>Quiz Online</h5>
+                        <p class="text-muted small mb-0">Pilih Quiz</p>
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#" class="quick-access-card">
+                        <i class="fas fa-pen-alt fa-3x text-warning mb-3"></i>
+                        <h5>Ulangan Harian</h5>
+                        <p class="text-muted small mb-0">Pilih Ulangan</p>
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3" data-aos="fade-up" data-aos-delay="250">
+                    <a href="berkas-nilai.html" class="quick-access-card">
+                        <i class="fas fa-file-alt fa-3x text-info mb-3"></i>
+                        <h5>Berkas Nilai</h5>
+                        <p class="text-muted small mb-0">Pilih Berkas</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: GALERI - CAROUSEL -->
+        <section class="mb-5">
+            <h2 class="text-center mb-4" data-aos="fade-up">
+                <i class="fas fa-images text-primary me-2"></i>
+                Galeri
+            </h2>
+            
+            <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="3"></button>
+                    <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="4"></button>
+                </div>
+                
+                <div class="carousel-inner rounded-4 shadow">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Tari Bali">
+                        <div class="carousel-caption">
+                            <h4>Pentas Tari Pendet</h4>
+                            <p class="d-none d-md-block">Penampilan tari tradisional Bali dalam acara sekolah</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Gamelan">
+                        <div class="carousel-caption">
+                            <h4>Workshop Gamelan</h4>
+                            <p class="d-none d-md-block">Belajar memainkan gamelan Bali</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1515890435782-59a5bb6ec191?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Aksara Bali">
+                        <div class="carousel-caption">
+                            <h4>Lomba Aksara Bali</h4>
+                            <p class="d-none d-md-block">Kompetisi menulis aksara Bali antar kelas</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1533460004989-cef01064af7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Seni Lukis">
+                        <div class="carousel-caption">
+                            <h4>Pameran Seni Lukis</h4>
+                            <p class="d-none d-md-block">Karya seni lukis tradisional dan modern</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Ukiran Bali">
+                        <div class="carousel-caption">
+                            <h4>Seni Ukir Bali</h4>
+                            <p class="d-none d-md-block">Pameran ukiran kayu khas Bali</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- SECTION 3: FOOTER -->
+     <div id="footer-placeholder"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4" style="display: none; width: 50px; height: 50px; z-index: 1000;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Custom JS -->
+     <script src="js/template.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Auto slide carousel every 3 seconds
+        const carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel'), {
+            interval: 3000,
+            wrap: true
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkas Nilai Bali - SIAKAD Lady</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            z-index: 100;
+        }
+        .nilai-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .nilai-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102,126,234,0.2);
+        }
+        .nilai-icon {
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+        .bg-quiz { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .bg-uh { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .bg-pts { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .bg-sas { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .bg-wajib { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Button Kembali -->
+    <div class="back-button">
+        <a href="index.html" class="btn btn-light rounded-pill shadow-sm">
+            <i class="fas fa-arrow-left me-2"></i>Kembali
+        </a>
+    </div>
+
+    <div class="container mt-5 pt-4">
+        <!-- Header -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <div class="d-inline-block p-3 bg-primary bg-opacity-10 rounded-circle mb-3">
+                <i class="fas fa-file-alt fa-3x text-primary"></i>
+            </div>
+            <h1 class="display-5 fw-bold">Berkas Nilai Bahasa Bali</h1>
+            <p class="text-muted">Kumpulan nilai Quiz, Ulangan Harian, PTS, dan SAS</p>
+        </div>
+
+        <!-- Grid Nilai sesuai skema -->
+        <div class="row g-4 justify-content-center">
+            <!-- KELAS X -->
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="nilai-card card">
+                    <div class="card-body text-center p-4">
+                        <div class="nilai-icon bg-quiz text-white">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h3 class="fw-bold">Kelas X</h3>
+                        
+                        <a href="https://drive.google.com/drive/folders/1NmdhUxEDZRZoKuJSjnxkOB54WwuaZHkd?usp=sharing" class="btn btn-outline-primary w-100" target="_blank">
+                            <i class="fas fa-eye me-2"></i>Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KELAS XI -->
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="150">
+                <div class="nilai-card card">
+                    <div class="card-body text-center p-4">
+                        <div class="nilai-icon bg-uh text-white">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h3 class="fw-bold">Kelas XI</h3>
+                        
+                        <a href="https://drive.google.com/drive/folders/1PZsKYZpyEhhHq9xgfgvi8NoWJz6TdO1n?usp=sharing" class="btn btn-outline-info w-100" target="_blank">
+                            <i class="fas fa-eye me-2"></i>Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PTS (Wajib)
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="nilai-card card">
+                    <div class="card-body text-center p-4">
+                        <div class="nilai-icon bg-wajib text-white">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3 class="fw-bold">PTS <span class="badge bg-warning text-dark ms-2">Wajib</span></h3>
+                        <div class="display-4 text-primary mb-2">88</div>
+                        <p class="text-muted mb-3">Penilaian Tengah Semester</p>
+                        <a href="https://docs.google.com/spreadsheets/d/1" class="btn btn-outline-primary w-100" target="_blank">
+                            <i class="fas fa-eye me-2"></i>Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+             SAS -->
+            <!-- <div class="col-md-3" data-aos="fade-up" data-aos-delay="250">
+                <div class="nilai-card card">
+                    <div class="card-body text-center p-4">
+                        <div class="nilai-icon bg-sas text-white">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3 class="fw-bold">SAS</h3>
+                        <div class="display-4 text-warning mb-2">90</div>
+                        <p class="text-muted mb-3">Sumatif Akhir Semester</p>
+                        <a href="https://docs.google.com/spreadsheets/d/1" class="btn btn-outline-warning w-100" target="_blank">
+                            <i class="fas fa-eye me-2"></i>Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        
+    </div>
+
+    <!-- SECTION 3: FOOTER -->
+     <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+        <!-- Custom JS -->
+     <script src="js/template.js"></script>
+     
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Modul - SIAKAD Lady</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            z-index: 100;
+        }
+        .pilih-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid #f0f0f0;
+            height: 100%;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .pilih-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+        .pilih-card.bali:hover {
+            background: linear-gradient(135deg, #667eea 0%, #c1a4dd 100%);
+            color: white;
+        }
+        .pilih-card.seni:hover {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .icon-circle {
+            width: 120px;
+            height: 120px;
+            line-height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            font-size: 48px;
+        }
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+        <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Button Kembali -->
+    <div class="back-button">
+        <a href="index.html" class="btn btn-light rounded-pill shadow-sm">
+            <i class="fas fa-arrow-left me-2"></i>Kembali ke Dashboard
+        </a>
+    </div>
+
+    <div class="container mt-5 pt-4">
+        <!-- Header -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <div class="d-inline-block p-3 bg-primary bg-opacity-10 rounded-circle mb-3">
+                <i class="fas fa-book-open fa-3x text-primary"></i>
+            </div>
+            <h1 class="display-5 fw-bold">Pilih Modul Pembelajaran</h1>
+            <p class="text-muted">Silakan pilih mata pelajaran yang ingin dipelajari</p>
+        </div>
+
+        <!-- Pilihan Mapel -->
+        <div class="row justify-content-center g-4">
+            <div class="col-md-5" data-aos="fade-right" data-aos-delay="100">
+                <a href="modul-bali.html" class="pilih-card bali">
+                    <div class="icon-circle bg-primary bg-opacity-10">
+                        <i class="fas fa-book text-primary"></i>
+                    </div>
+                    <h2 class="fw-bold mb-3">Bahasa Bali</h2>
+                    <p class="mb-4">Aksara Bali, Tata Bahasa, Paribasa, Sastra Bali</p>
+                    <div class="d-flex justify-content-center gap-2">
+
+                    </div>
+                    <div class="mt-4">
+                        <span class="btn btn-outline-primary rounded-pill px-4">Pilih <i class="fas fa-arrow-right ms-2"></i></span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-5" data-aos="fade-left" data-aos-delay="200">
+                <a href="modul-seni.html" class="pilih-card seni">
+                    <div class="icon-circle bg-success bg-opacity-10">
+                        <i class="fas fa-palette text-success"></i>
+                    </div>
+                    <h2 class="fw-bold mb-3">Seni Budaya</h2>
+                    <p class="mb-4">Seni Tari, Seni Musik, Seni Rupa, Seni Ukir</p>
+                    <div class="d-flex justify-content-center gap-2">
+
+                    </div>
+                    <div class="mt-4">
+                        <span class="btn btn-outline-success rounded-pill px-4">Pilih <i class="fas fa-arrow-right ms-2"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Tambahan -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="fas fa-info-circle fa-2x me-3"></i>
+                    <div>
+                        <strong>Informasi Modul:</strong> Setiap modul dilengkapi dengan materi lengkap dalam format PDF yang dapat dibaca atau diunduh.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- SECTION 3: FOOTER -->
+     <div id="footer-placeholder"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <!-- Custom JS -->
+     <script src="js/template.js"></script>
+    
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

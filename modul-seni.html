@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul Seni Budaya - SIAKAD Lady</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* Style sama seperti modul-bali.html */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .back-button {
+            margin: 20px 0;
+        }
+        .hero-modul {
+            background: linear-gradient(135deg, #43e97b10 0%, #38f9d710 100%);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid #43e97b20;
+        }
+        .modul-card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            height: 100%;
+            background: white;
+            cursor: pointer;
+        }
+        .modul-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(67,233,123,0.2);
+        }
+        .modul-header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+        .modul-number {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 48px;
+            font-weight: bold;
+            opacity: 0.2;
+            color: white;
+        }
+        .modul-body {
+            padding: 25px;
+        }
+        .pdf-icon {
+            font-size: 48px;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+        .badge-level {
+            background: #e5f6ff;
+            color: #0099ff;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+        }
+        .btn-pdf {
+            background: #dc3545;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-pdf:hover {
+            background: #c82333;
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        /* Modal PDF Viewer */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+        .pdf-modal-content {
+            position: relative;
+            margin: 50px auto;
+            width: 90%;
+            height: 90%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .pdf-modal-header {
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pdf-modal-body {
+            height: calc(100% - 70px);
+            overflow: auto;
+        }
+        .pdf-modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .close-modal {
+            font-size: 30px;
+            cursor: pointer;
+            color: #666;
+        }
+        .close-modal:hover {
+            color: #dc3545;
+        }
+        
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: #43e97b;
+            transform: translateY(-5px);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+<div style="height: 70px;"></div>
+
+<!-- BUTTON KEMBALI -->
+<div class="container">
+    <div class="back-button">
+        <a href="modul.html" class="btn btn-outline-success rounded-pill">
+            <i class="fas fa-arrow-left me-2"></i>Kembali ke Pilihan Modul
+        </a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-modul" data-aos="fade-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">🎨 Modul Seni Budaya</h1>
+                <p class="lead mb-3">Koleksi lengkap modul pembelajaran Seni Budaya dalam format PDF</p>
+                <div class="d-flex gap-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-palette text-success me-2"></i>
+                        <span>3 Modul</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-pdf text-danger me-2"></i>
+                        <span>Format PDF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-palette fa-5x text-success opacity-50"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- DAFTAR MODUL SENI BUDAYA - 8 MODUL -->
+    <div class="row g-4">
+        <!-- Modul 1: Seni Tari -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/PENGENALAN SENI RUPA DI SEKITAR KITA.pdf', 'Modul 1: Pengenalan Seni Rupa')">
+                <div class="modul-header">
+                    <i class="fas fa-music mb-2"></i>
+                    <h5 class="mb-0">Modul 1</h5>
+                    <div class="modul-number">01</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Pengenalan Seni Rupa</h6>
+                    <p class="text-muted small mb-3">Pengenalan Seni Rupa di Sekitar Kita</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>6 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>24 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/PENGENALAN SENI RUPA DI SEKITAR KITA.pdf', 'Modul 1: Pengenalan Seni Rupa')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modul 2: Seni Musik Gamelan -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="150">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/PENGENALAN BAHAN DAN ANEKA TEKNIK BERKARYA.pdf', 'Modul 2: Seni Musik Gamelan')">
+                <div class="modul-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <i class="fas fa-drum mb-2"></i>
+                    <h5 class="mb-0">Modul 2</h5>
+                    <div class="modul-number">02</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Pengenalan Bahan dan Teknik Berkarya</h6>
+                    <p class="text-muted small mb-3">Pengenalan bahan dan teknik berkarya seni rupa tradisional Bali</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>12 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>5 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/PENGENALAN BAHAN DAN ANEKA TEKNIK BERKARYA.pdf', 'Modul 2: Pengenalan Bahan dan Teknik Berkarya')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modul 3: Seni Lukis Tradisional -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/MENGAMATI DAN MENDESKRIPSIKAN KARYA SENI RUPA KARYA RUPA.pdf', 'Modul 4: Seni Ukir Bali')">
+                <div class="modul-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <i class="fas fa-carving mb-2"></i>
+                    <h5 class="mb-0">Modul 3</h5>
+                    <div class="modul-number">04</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">MENGAMATI DAN MENDESKRIPSIKAN KARYA SENI RUPA KARYA RUPA</h6>
+                    <p class="text-muted small mb-3">Mengamati dan mendeskripsikan karya seni rupa tradisional Bali</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>38 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>3.6 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/MENGAMATI DAN MENDESKRIPSIKAN KARYA SENI RUPA KARYA RUPA.pdf', 'Modul 4: MENGAMATI DAN MENDESKRIPSIKAN KARYA SENI RUPA KARYA RUPA')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modul 5: Seni Pahat -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/modul5-pahat.pdf', 'Modul 5: Seni Pahat')">
+                <div class="modul-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+                    <i class="fas fa-hammer mb-2"></i>
+                    <h5 class="mb-0">Modul 5</h5>
+                    <div class="modul-number">05</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Seni Pahat</h6>
+                    <p class="text-muted small mb-3">Teknik memahat batu, kayu, dan pembuatan patung tradisional</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>42 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>4.0 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/modul5-pahat.pdf', 'Modul 5: Seni Pahat')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 6: Seni Kriya -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="350">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/modul6-kriya.pdf', 'Modul 6: Seni Kriya')">
+                <div class="modul-header" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <i class="fas fa-hands mb-2"></i>
+                    <h5 class="mb-0">Modul 6</h5>
+                    <div class="modul-number">06</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Seni Kriya</h6>
+                    <p class="text-muted small mb-3">Anyaman, tenun, kerajinan perak, dan kerajinan tradisional Bali</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>36 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>3.4 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/modul6-kriya.pdf', 'Modul 6: Seni Kriya')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 7: Seni Pertunjukan Modern -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/modul7-modern.pdf', 'Modul 7: Seni Pertunjukan Modern')">
+                <div class="modul-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <i class="fas fa-theater-masks mb-2"></i>
+                    <h5 class="mb-0">Modul 7</h5>
+                    <div class="modul-number">07</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Seni Pertunjukan Modern</h6>
+                    <p class="text-muted small mb-3">Drama, teater, dan seni pertunjukan kontemporer Bali</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>44 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>4.2 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/modul7-modern.pdf', 'Modul 7: Seni Pertunjukan Modern')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- Modul 8: Apresiasi dan Kritik Seni -->
+        <!-- <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="450">
+            <div class="modul-card" onclick="openPDF('assets/pdf/seni-budaya/modul8-pameran.pdf', 'Modul 8: Apresiasi dan Kritik Seni')">
+                <div class="modul-header" style="background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);">
+                    <i class="fas fa-star mb-2"></i>
+                    <h5 class="mb-0">Modul 8</h5>
+                    <div class="modul-number">08</div>
+                </div>
+                <div class="modul-body">
+                    <div class="pdf-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Apresiasi dan Kritik Seni</h6>
+                    <p class="text-muted small mb-3">Cara mengapresiasi karya seni, pameran, dan kritik seni</p>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="badge bg-light text-dark"><i class="fas fa-file me-1"></i>40 hlm</span>
+                        <span class="badge bg-light text-dark"><i class="fas fa-database me-1"></i>3.8 MB</span>
+                    </div>
+                    <button class="btn btn-pdf btn-sm w-100" onclick="event.stopPropagation(); openPDF('assets/pdf/seni-budaya/modul8-pameran.pdf', 'Modul 8: Apresiasi dan Kritik Seni')">
+                        <i class="fas fa-eye me-1"></i> Lihat PDF
+                    </button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<!-- MODAL PDF VIEWER -->
+<div id="pdfModal" class="pdf-modal">
+    <div class="pdf-modal-content">
+        <div class="pdf-modal-header">
+            <h5 id="pdfModalTitle" class="mb-0">Judul Modul</h5>
+            <span class="close-modal" onclick="closePDF()">&times;</span>
+        </div>
+        <div class="pdf-modal-body">
+            <iframe id="pdfViewer" src="" title="PDF Viewer"></iframe>
+        </div>
+    </div>
+</div>
+
+    <!-- SECTION 3: FOOTER -->
+     <div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+     <script src="js/template.js"></script>
+    
+
+<script>
+    AOS.init();
+
+    // Fungsi untuk membuka PDF di modal
+    function openPDF(pdfPath, title) {
+        document.getElementById('pdfModal').style.display = 'block';
+        document.getElementById('pdfViewer').src = pdfPath;
+        document.getElementById('pdfModalTitle').innerText = title;
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk menutup modal PDF
+    function closePDF() {
+        document.getElementById('pdfModal').style.display = 'none';
+        document.getElementById('pdfViewer').src = '';
+        document.body.style.overflow = 'auto';
+    }
+
+    // Tutup modal jika klik di luar konten
+    window.onclick = function(event) {
+        var modal = document.getElementById('pdfModal');
+        if (event.target == modal) {
+            closePDF();
+        }
+    }
+
+    // Tutup modal dengan tombol ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closePDF();
+        }
+    });
+</script>
+
+</body>
+</html>
