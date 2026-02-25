@@ -23,14 +23,17 @@ body {
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
+    display: flex;
+    align-items: center; /* ensure logo and text are vertically aligned */
 }
 
 /* Logo sizing in navbar */
 .navbar-logo {
     height: 40px;      /* adjust as needed */
     width: auto;
-    /* optionally add margin-right to separate from text */
-    margin-right: 8px;
+    margin-right: 8px;  /* separate from text */
+    vertical-align: middle;
+    object-fit: contain;
 }
 
 /* Profile Section */
@@ -184,6 +187,7 @@ footer a:hover {
     width: auto;
     margin-right: 8px;
     vertical-align: middle;
+    object-fit: contain;
 }
 
 .splash-title {
@@ -192,6 +196,17 @@ footer a:hover {
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     letter-spacing: 2px;
+}
+
+/* small-screen logo tweaks */
+@media (max-width: 576px) {
+    .navbar-logo {
+        height: 30px;
+        margin-right: 4px;
+    }
+    .footer-logo {
+        height: 24px;
+    }
 }
 
 .splash-subtitle {

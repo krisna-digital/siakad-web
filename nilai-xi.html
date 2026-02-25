@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkas Nilai Bahasa Bali - SIAKAD Lady</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    
+    <style>
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        /* logo sizing (inline page override) */
+        .navbar-logo {
+            height: 40px;
+            width: auto;
+            margin-right: 8px;
+            vertical-align: middle;
+            object-fit: contain;
+        }
+        .footer-logo {
+            height: 30px;
+            width: auto;
+            margin-right: 8px;
+            vertical-align: middle;
+            object-fit: contain;
+        }
+        .back-button {
+            position: absolute;
+            top: 100px;
+            left: 20px;
+            z-index: 100;
+        }
+        
+        /* Hero Section */
+        .hero-nilai {
+            background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+            border-radius: 30px;
+            padding: 110px;
+            margin-bottom: 40px;
+            border: 1px solid #667eea20;
+        }
+        
+        /* Info Kelas */
+        .info-kelas {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+        .info-item {
+            padding: 10px 0;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #666;
+            width: 150px;
+            display: inline-block;
+        }
+        .info-value {
+            font-weight: 500;
+            color: #333;
+        }
+        
+        
+        /* Tabel Nilai */
+        .nilai-table-container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+        .table-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px 15px 0 0;
+            margin: -20px -20px 20px -20px;
+        }
+        .table {
+            font-size: 13px;
+        }
+        .table th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+        .table thead th {
+            border-bottom: 2px solid #dee2e6;
+        }
+        .table-bordered {
+            border: 1px solid #dee2e6;
+        }
+        .sub-header {
+            background: #e9ecef;
+            font-weight: 600;
+        }
+        .nilai-baik {
+            color: #28a745;
+            font-weight: 600;
+        }
+        .nilai-cukup {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        .nilai-kurang {
+            color: #dc3545;
+            font-weight: 600;
+        }
+        /* Responsive adjustments for small screens */
+        @media (max-width: 576px) {
+            .table {
+                font-size: 11px;
+            }
+            .table th,
+            .table td {
+                padding: 0.35rem 0.5rem;
+            }
+            .sheets-frame {
+                height: 400px;
+            }
+            /* shrink logos on very small viewports */
+            .navbar-logo {
+                height: 30px;
+                margin-right: 4px;
+            }
+            .footer-logo {
+                height: 24px;
+            }
+        }
+        
+        /* Google Sheets Container */
+        .sheets-container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-top: 30px;
+        }
+        .sheets-frame {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+        .social-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            background: #667eea;
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        /* Loading indicator */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+<div id="navbar-placeholder"></div>
+
+<!-- BUTTON KEMBALI -->
+<div class="container">
+    <div class="back-button">
+        <a href="berkas-nilai.html" class="btn btn-outline-primary rounded-pill">
+            <i class="fas fa-arrow-left me-2"></i>Kembali ke Pilihan Berkas
+        </a>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container mt-5 pt-4">
+    <!-- Hero Section -->
+    <div class="hero-nilai" data-aos="fade-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3">📊 Nilai Bahasa Bali Kelas XI</h1>
+                <p class="lead mb-3">Formatif, Sumatif Lingkup Materi, Sumatif Akhir Semester</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-file-spreadsheet fa-5x text-primary opacity-50"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- KONTROL SHEET: judul + dropdown + refresh -->
+    <div class="table-header d-flex justify-content-between align-items-center mb-3" data-aos="fade-up">
+        <h5 class="mb-0"><i class="fas fa-table me-2"></i><span id="tableTitle">Daftar Nilai Bahasa Bali</span></h5>
+        <div class="d-flex align-items-center">
+            <span id="loadingIndicator" class="loading me-2" style="display: none;"></span>
+            <select id="sheetSelector" class="form-select form-select-sm bg-white text-dark" style="width: auto;">
+                <!-- options will be populated by JS -->
+            </select>
+            <button id="refreshBtn" class="btn btn-outline-secondary btn-sm ms-2" title="Muat ulang sheet">↻</button>
+        </div>
+    </div>
+    <!-- SEARCH BAR -->
+    <div class="search-container mb-3" data-aos="fade-up">
+        <div class="input-group" style="max-width:400px;">
+            <input id="searchInput" type="text" class="form-control" placeholder="Cari NIS atau Nama">
+            <button id="searchBtn" class="btn btn-primary">Cari</button>
+        </div>
+    </div>
+    <!-- SEARCH RESULTS -->
+    <div id="searchResults" class="table-responsive mb-4" style="display:none;" data-aos="fade-up">
+        <table class="table table-sm table-striped">
+            <thead><tr><th>NIS</th><th>Nama</th><th>Kelas</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <!-- GOOGLE SHEETS INTEGRATION -->
+    <div class="sheets-container" data-aos="fade-up">
+        <p class="text-muted mb-3">Data nilai terintegrasi langsung dari Google Spreadsheet. Perubahan akan terlihat secara real-time.</p>
+        
+        <!-- Google Sheets Embed -->
+        <div class="sheets-frame">
+            <iframe 
+                id="googleSheetFrame"
+                src="" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                scrolling="yes">
+            </iframe>
+        </div>
+        
+    </div>
+</div>
+
+    <!-- SECTION 3: FOOTER -->
+     <div id="footer-placeholder"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+     <script src="js/template.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(102, 126, 234, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(102, 126, 234, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Auto slide carousel every 3 seconds
+        const carousel = new bootstrap.Carousel(document.getElementById('galleryCarousel'), {
+            interval: 3000,
+            wrap: true
+        });
+    </script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- PapaParse -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+
+<script>
+// Initialize AOS
+AOS.init();
+
+// ============================================
+// KONFIGURASI GOOGLE SHEETS - GANTI DENGAN ID ANDA
+// ============================================
+const GOOGLE_SHEETS_CONFIG = {
+    embedId: '2PACX-1vTfwO2QdAc7aNedTeD0gAlfDWTLcIrIpnaU849_cHX6K5hlYRIjJCsXxy6fxa4ZpV2jRglU6pzntdry',
+    docId: '1-KmLd_F5z1O8XOO6OVtygY4XWtwzVOC9Nc4S_b3X_NQ',
+    csvBase: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwO2QdAc7aNedTeD0gAlfDWTLcIrIpnaU849_cHX6K5hlYRIjJCsXxy6fxa4ZpV2jRglU6pzntdry/pub?output=csv',
+    sheetBase: 'https://docs.google.com/spreadsheets/d/1-KmLd_F5z1O8XOO6OVtygY4XWtwzVOC9Nc4S_b3X_NQ/edit',
+    sheets: [
+        { name: 'XI P1 (Perhotelan 1)', gid: '0', kelas: 'XI P1' },
+        { name: 'XI P2 (Perhotelan 2)', gid: '1161270235', kelas: 'XI P2' },
+        { name: 'XI P3 (Perhotelan 3)', gid: '926173802', kelas: 'XI P3' },
+        { name: 'XI P4 (Perhotelan 4)', gid: '1755416196', kelas: 'XI P4' },
+        { name: 'XI P5 (Perhotelan 5)', gid: '312407252', kelas: 'XI P5' },
+        { name: 'XI K1 (Kuliner 1)', gid: '252251182', kelas: 'XI K1' },
+        { name: 'XI K2 (Kuliner 2)', gid: '373120187', kelas: 'XI K2' },
+        { name: 'XI K3 (Kuliner 3)', gid: '109162566', kelas: 'XI K3' },
+        { name: 'XI K4 (Kuliner 4)', gid: '2050265088', kelas: 'XI K4' },
+        { name: 'XI K5 (Kuliner 5)', gid: '514862589', kelas: 'XI K5' }
+            
+    ],
+    currentIndex: 0,
+    csvUrl: '',
+    sheetUrl: ''
+};
+
+
+// Inisialisasi Google Sheets (iframe & link) berdasarkan sheet terpilih
+function initGoogleSheets() {
+    const iframe = document.getElementById('googleSheetFrame');
+    const sheet = GOOGLE_SHEETS_CONFIG.sheets[GOOGLE_SHEETS_CONFIG.currentIndex];
+    iframe.src = `https://docs.google.com/spreadsheets/d/e/${GOOGLE_SHEETS_CONFIG.embedId}/pubhtml?widget=true&headers=false&gid=${sheet.gid}`;
+    document.getElementById('openSheetBtn').href = `${GOOGLE_SHEETS_CONFIG.sheetBase}#gid=${sheet.gid}`;
+}
+
+// ---- SEARCH SUPPORT ----
+// array of objects pulled from every sheet for filtering
+let currentData = [];
+
+// safe number parser
+function safeParse(val) {
+    if (!val || val.toString().trim() === '') return 0;
+    const parsed = parseFloat(val.toString().replace(',', '.'));
+    return isNaN(parsed) ? 0 : parsed;
+}
+
+
+// fetch CSV for all sheets in background and merge rows
+function fetchDataForSearch() {
+    currentData = [];
+    // summaryData is no longer used
+    GOOGLE_SHEETS_CONFIG.sheets.forEach(sheet => {
+        const url = `${GOOGLE_SHEETS_CONFIG.csvBase}&gid=${sheet.gid}&t=${Date.now()}`;
+        Papa.parse(url, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                const valid = results.data.filter(row => {
+                    const values = Object.values(row);
+                    return values.some(v => v && v.toString().trim() !== '');
+                }).map(r => ({...r, _sheet: sheet.kelas}));
+                currentData = currentData.concat(valid);
+                // note: summaryData disabled (not used)
+                // summaryData[sheet.kelas] = computeSummary(valid);
+                // (displaySummaryForCurrentSheet would update DOM elements that have been removed)
+            }
+        });
+    });
+}
+
+// perform search and render results
+function searchData(term) {
+    term = term.toString().toLowerCase().trim();
+    const tbody = document.querySelector('#searchResults tbody');
+    tbody.innerHTML = '';
+    if (!term) {
+        document.getElementById('searchResults').style.display = 'none';
+        return;
+    }
+    const matches = currentData.filter(r => {
+        const nis = (r.NIS || r.nis || '').toString().toLowerCase();
+        const nama = (r.NAMA || r.nama || '').toString().toLowerCase();
+        return nis.includes(term) || nama.includes(term);
+    });
+    if (matches.length === 0) {
+        document.getElementById('searchResults').style.display = 'none';
+        return;
+    }
+    matches.forEach(r => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r.NIS||r.nis||''}</td><td class="text-start">${r.NAMA||r.nama||''}</td><td>${r._sheet||''}</td>`;
+        tbody.appendChild(tr);
+    });
+    document.getElementById('searchResults').style.display = 'block';
+}
+
+
+
+
+
+
+
+// Populate sheet selector
+function populateSheetSelector() {
+    const sel = document.getElementById('sheetSelector');
+    sel.innerHTML = '';
+    GOOGLE_SHEETS_CONFIG.sheets.forEach((s, idx) => {
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = s.name;
+        sel.appendChild(opt);
+    });
+    sel.value = GOOGLE_SHEETS_CONFIG.currentIndex;
+    sel.addEventListener('change', function() {
+        const idx = parseInt(this.value, 10);
+        loadSheet(idx);
+        fetchDataForSearch();
+        // clear search UI when changing class
+        const si = document.getElementById('searchInput');
+        if (si) si.value = '';
+        document.getElementById('searchResults').style.display = 'none';
+    });
+}
+
+// Muat data untuk sheet tertentu
+function loadSheet(index) {
+    GOOGLE_SHEETS_CONFIG.currentIndex = index;
+    const sheet = GOOGLE_SHEETS_CONFIG.sheets[index];
+    
+    // Update judul tabel
+    document.getElementById('tableTitle').textContent = `Daftar Nilai Bahasa Bali - ${sheet.kelas}`;
+    
+    
+    // Update iframe dan link
+    initGoogleSheets();
+    
+    // optionally show spinner inside loadingIndicator while sheet loads
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    loadingIndicator.style.display = 'inline-block';
+    // hide after a short delay (iframe has its own loading UI)
+    setTimeout(() => loadingIndicator.style.display = 'none', 1000);
+}
+
+// Jalankan semua fungsi
+document.addEventListener('DOMContentLoaded', function() {
+    // Populate sheet selector
+    populateSheetSelector();
+    
+    // attach refresh button handler: reload the iframe for current sheet
+    const refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            loadSheet(GOOGLE_SHEETS_CONFIG.currentIndex);
+            fetchDataForSearch();
+            // clear search UI when refreshing
+            const si = document.getElementById('searchInput');
+            if (si) si.value = '';
+            document.getElementById('searchResults').style.display = 'none';
+        });
+    }
+    
+    // attach search handler
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+    if (searchBtn && searchInput) {
+        searchBtn.addEventListener('click', function() {
+            searchData(searchInput.value);
+        });
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') searchData(this.value);
+        });
+    }
+    
+    // Load sheet pertama and fetch its data for search
+    loadSheet(0);
+    fetchDataForSearch();
+});
+</script>
+
+</body>
+</html>
